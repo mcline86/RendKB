@@ -1,0 +1,53 @@
+<% include part/header %>
+
+<style>
+  .data {
+    display: none;
+  }
+
+  #docDisplay {
+    background-color: rgba(163, 138, 89, .9);
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 5px 7px rgba(50, 50, 50, .7);
+    border: 3px solid rgba(50, 50, 50, .7);
+  }
+
+  #docDisplay code {
+    word-wrap: break-word;
+  }
+</style>
+
+<% if(doc) { %>
+  <textarea class="data"><%= doc.body %></textarea>
+<% } else { %>
+  <textarea class="data">#Error
+We apologize for the inconvenience, but the document we tried to display did not load correctly.
+
+Please try the folllowing steps to resolve the issue:
+
+- Refresh the page
+- Return to the previous page and see if the page is still available.
+- Leave and never come back.
+- Donate to us because we are poor.
+
+**Please attempt all of the steps before bugging our support staff, they scare us. . .**
+  </textarea>
+<% } %>
+
+<div class="container">
+  <div id="docDisplay">
+    Loading shit in here, please don't track it on the carpet.
+  </div>
+</div>
+
+<script type="text/javascript">
+  $().ready(function() {
+    var text = $(".data").html();
+    var converter = new showdown.Converter();
+    var html      = converter.makeHtml(text);
+    $("#docDisplay").html(html);
+  });
+</script>
+
+<% include part/footer %>

@@ -1,0 +1,15 @@
+<% include part/header %>
+
+<div class="container">
+  <a class="btn btn-primary" href="/editor">Editor</a>
+
+  <% if(docs){ docs.forEach(function(doc) { %>
+    <script type="text/javascript">
+      console.log("<%= doc._id %>");
+    </script>
+      <a href="/doc/<%= doc._id %>/edit"> <%= doc.title %> </a>
+  <% })} %>
+</div>
+
+
+<% include part/footer %>

@@ -1,0 +1,10 @@
+body {
+  background-image: url("../images/hearthhome.jpg");
+}
+
+
+#targetDiv {
+  border: 2px dashed #444;
+  background-color: rgba(250, 250, 250, .7);
+  padding: 15px;
+}
