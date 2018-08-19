@@ -75,10 +75,10 @@ app.get("/doc/new", function(req, res) {
 app.post("/doc/new", function(req, res, next) {
   Doc.create(req.body.docInfo, function(err, doc){
     if(err) {
-        res.render("index");
+        res.redirect("back");
 
     } else {
-        res.render("index");
+        res.redirect("/");
     }
   });
 });
@@ -122,7 +122,7 @@ app.post("/doc/:id/update", function(req, res, next) {
         res.render("index");
       }else {
 
-        res.render("editor");
+        res.render("editor", {doc: doc});
       }
     });
 });

@@ -26,7 +26,8 @@
   <form class="form" action="/doc/<%= doc._id %>/update" method="post">
   <input class='form-control' type="text" name="docInfo[title]" value="<%= doc.title %>" placeholder="Title">
   <br>
-  <input id='tagIDs' type="hidden" name='docInfo[category]' name="" value="none">
+  <input id='tagIDs' type="hidden" name='docInfo[category]' name="" value="<%= doc.category %>">
+
   <textarea name="docInfo[body]" class="form-control" id="sourceTA" rows="10" cols="82"><%= doc.body %></textarea>
   <hr/>
   <button class='btn btn-success text-center' id="sbmt">Submit</button>
@@ -58,6 +59,13 @@
 
 
 <script type="text/javascript">
+  var loadedCats = $("#tagIDs").val();
+  loadedCats.split(";").forEach(function(aTag) {
+    if(aTag != 'none'){
+      addTag(aTag);
+    }
+  });
+
   function getTags(){
     $("#tagList").html("");
     var tags = $('#tagIDs').val();
@@ -66,12 +74,17 @@
       url: "/tags/" + parentID + "/parent",
       success: function(data){
         data.forEach(function(tag) {
-          var temp = "<a class='list-group-item' href='javascript:addTag('"+ tag._id +"')'>" + tag.name + "</a>";
+          var temp = "<a class='list-group-item' data-id='" + tag._id + "'>" + tag.name + "</a>";
           $('#tagList').append(temp);
+
         });
       },
       complete: function(){
         $('#addTagModal').modal('show');
+        $('.list-group-item').on("click", function(e) {
+          var tmp = $(e.target).data("id");
+          addTag(tmp);
+        });
       }
     });
   }
@@ -88,6 +101,9 @@
             current.val(current.val() + ";" + data._id);
             $("ol.breadcrumb").append(temp);
             appendLink();
+        },
+        complete: function() {
+          $("#addTagModal").modal("hide");
         }
       });
     }
