@@ -4,10 +4,16 @@ body {
 
 
 #targetDiv {
-  border: 2px dashed #444;
-  background-color: rgba(250, 250, 250, .7);
+  border: 2px solid #ccc;
+  background-color: rgba(25, 25, 25, .7);
+  color: #ddd;
   padding: 15px;
 }
+
+#targetDiv > h1 {
+  color: #ddd;
+}
+
 
 
 #addTagModal .list-group-item{

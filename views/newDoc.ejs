@@ -1,5 +1,13 @@
 <% include part/header %>
 
+<style media="screen">
+  #display {
+    background-color: rgba(25, 25, 25, .85);
+    border-radius: 10px;
+    box-shadow: 0 5px 7px #000;
+    padding: 10px;
+  }
+</style>
 
 <script type="text/javascript">
   function run() {
@@ -12,8 +20,8 @@
     }
 </script>
 
-<br><br>
-<div class="container">
+<br>
+<div class="container" id='display'>
   <nav aria-label="breadcrumb">
     <ol class='breadcrumb'>
       <li class='breadcrumb-item active'>Tags:</li>
@@ -23,16 +31,12 @@
   <input class='form-control' type="text" name="docInfo[title]" value="" placeholder="Title">
   <br>
   <input id='tagIDs' type="hidden" name='docInfo[category]' name="" value="none">
-  <textarea name="docInfo[body]" class="form-control" id="sourceTA" rows="10" cols="82"></textarea>
+  <textarea name="docInfo[body]" class="form-control" id="sourceTA" rows="19" cols="82"></textarea>
   <hr/>
 
   <button class='btn btn-success text-center' id="sbmt">Submit</button>
+  <a href="#" class='btn btn-primary pull-right' data-toggle='modal' data-target="#previewModal"> Preview </a>
   </form>
-  <button class='btn btn-success text-center' id="runBtn" onClick="run()">Preview</button>
-  <hr/>
-  <div id="targetDiv" >
-      <h1 class="text-center">Nothing Yet</h1>
-  </div>
 </div>
 
 <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog">
@@ -52,6 +56,25 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Preview</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="targetDiv" >
+            <h1 class="text-center">Nothing Yet</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script type="text/javascript">
   function getTags(){
